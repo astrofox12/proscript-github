@@ -1,0 +1,15 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import PublicOffer from "../../components/PublicOffer.jsx";
+import { useTranslations } from "../../i18n/utils.js";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SEO_DATA } from '../../lib/seo.js';
+const locale = Astro.currentLocale ?? "en"
+const t = useTranslations(locale)
+const seo = SEO_DATA[locale]['public-offer'];
+const homeUrl = getRelativeLocaleUrl(locale, '');
+---
+
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
+    <PublicOffer client:load t={JSON.stringify(t)} homeUrl={homeUrl} currentLocale={locale} />
+</Layout>

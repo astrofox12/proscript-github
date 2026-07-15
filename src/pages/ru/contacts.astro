@@ -1,0 +1,14 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import ContactsPage from "../../components/ContactsPage.jsx";
+import { useTranslations } from "../../i18n/utils.js";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SEO_DATA } from '../../lib/seo.js';
+const locale = Astro.currentLocale ?? "en"
+const t = useTranslations(locale)
+const seo = SEO_DATA[locale].contacts;
+const homeUrl = getRelativeLocaleUrl(locale, '');
+---
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
+    <ContactsPage client:load t={JSON.stringify(t)} homeUrl={homeUrl} currentLocale={locale} />
+</Layout>

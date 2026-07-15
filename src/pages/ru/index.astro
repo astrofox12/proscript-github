@@ -1,0 +1,18 @@
+---
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import Layout from "../../layouts/Layout.astro";
+import Store from "../../components/Store.jsx";
+import { SEO_DATA, getJsonLd } from '../../lib/seo.js';
+const locale = Astro.currentLocale ?? "en"
+const seo = SEO_DATA[locale].home;
+const jsonLd = getJsonLd('website', {}, locale);
+const productUrlPrefix = getRelativeLocaleUrl(locale, 'product')
+const courseUrlPrefix = getRelativeLocaleUrl(locale, 'course')
+const termsUrl = getRelativeLocaleUrl(locale, 'public-offer')
+const privacyUrl = getRelativeLocaleUrl(locale, 'privacy-policy')
+const aboutUrl = getRelativeLocaleUrl(locale, 'about')
+const blogUrl = getRelativeLocaleUrl(locale, 'blog')
+---
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={jsonLd}>
+    <Store client:load currentLocale={locale} productUrlPrefix={productUrlPrefix} courseUrlPrefix={courseUrlPrefix} termsUrl={termsUrl} privacyUrl={privacyUrl} aboutUrl={aboutUrl} blogUrl={blogUrl} />
+</Layout>

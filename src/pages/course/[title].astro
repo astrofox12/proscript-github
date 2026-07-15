@@ -1,0 +1,32 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CourseDetail from "../../components/CourseDetail.jsx";
+import { COURSES } from "../../lib/courses.js";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { getCourseSEO, getJsonLd } from '../../lib/seo.js';
+
+export function getStaticPaths() {
+  return COURSES.map((course) => ({
+    params: { title: course.slug },
+    props: { course },
+  }));
+}
+
+const { course } = Astro.props;
+const locale = Astro.currentLocale ?? "en";
+const seo = course ? getCourseSEO(course, locale) : null;
+const jsonLd = course ? getJsonLd('course', course, locale) : null;
+const homeUrl = getRelativeLocaleUrl(locale, '');
+const termsUrl = getRelativeLocaleUrl(locale, 'public-offer');
+const privacyUrl = getRelativeLocaleUrl(locale, 'privacy-policy');
+---
+
+<Layout title={seo?.title} description={seo?.description} keywords={seo?.keywords} jsonLd={jsonLd}>
+  {course ? (
+    <CourseDetail client:load course={JSON.stringify(course)} currentLocale={locale} homeUrl={homeUrl} termsUrl={termsUrl} privacyUrl={privacyUrl} />
+  ) : (
+    <main class="catalog">
+      <p>Course not found</p>
+    </main>
+  )}
+</Layout>

@@ -1,0 +1,80 @@
+---
+import "../styles/app.css";
+import Header from "../components/Header.jsx";
+import Footer from "../components/Footer.jsx";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SITE_URL } from '../lib/seo.js';
+
+interface Props {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  canonicalUrl?: string;
+  jsonLd?: Record<string, any>;
+}
+
+const {
+  title = 'ProScript Academy — Online Programming Courses',
+  description = 'Learn programming from scratch with ProScript Academy.',
+  keywords = 'programming courses, learn to code, online programming school',
+  canonicalUrl,
+  jsonLd,
+} = Astro.props;
+
+const locale = Astro.currentLocale ?? "en";
+const currentUrl = canonicalUrl || `${SITE_URL}${Astro.url.pathname}`;
+const isHomePage = Astro.url.pathname === '/' || Astro.url.pathname === '/ru/';
+const aboutUrl = getRelativeLocaleUrl(locale, 'about');
+const blogUrl = getRelativeLocaleUrl(locale, 'blog');
+---
+
+<!doctype html>
+<html lang={locale}>
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="icon" href="/favicon.ico" />
+
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<link rel="canonical" href={currentUrl} />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={currentUrl} />
+		<meta property="og:site_name" content="ProScript Academy" />
+		<meta property="og:locale" content={locale === 'ru' ? 'ru_RU' : 'en_US'} />
+
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+
+		{jsonLd && (
+			<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+		)}
+	</head>
+	<body>
+		<div class="app">
+			<Header
+				currentLocale={locale}
+				logoAsLink={!isHomePage}
+				aboutUrl={aboutUrl}
+				blogUrl={blogUrl}
+				client:load
+			/>
+			<slot />
+			<Footer
+			    aboutUrl={aboutUrl}
+				contactsUrl={getRelativeLocaleUrl(locale, 'contacts')}
+				termsUrl={getRelativeLocaleUrl(locale, 'terms-and-conditions')}
+				privacyUrl={getRelativeLocaleUrl(locale, 'privacy-policy')}
+				publicOfferUrl={getRelativeLocaleUrl(locale, 'public-offer')}
+				currentLocale={locale}
+				client:load
+			/>
+		</div>
+	</body>
+</html>

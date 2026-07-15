@@ -1,0 +1,15 @@
+---
+import Layout from "../layouts/Layout.astro";
+import AboutPage from "../components/AboutPage.jsx";
+import { useTranslations } from "../i18n/utils.js";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SEO_DATA, getJsonLd } from '../lib/seo.js';
+const locale = Astro.currentLocale ?? "en"
+const t = useTranslations(locale)
+const seo = SEO_DATA[locale].about;
+const jsonLd = getJsonLd('organization', {}, locale);
+const homeUrl = getRelativeLocaleUrl(locale, '');
+---
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={jsonLd}>
+    <AboutPage a={Astro.currentLocale} client:load t={JSON.stringify(t)} homeUrl={homeUrl} currentLocale={locale} />
+</Layout>

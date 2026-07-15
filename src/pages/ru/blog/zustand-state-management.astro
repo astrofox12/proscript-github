@@ -1,0 +1,170 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SEO_DATA, getJsonLd } from '../../../lib/seo.js';
+const locale = Astro.currentLocale ?? "ru"
+const seo = SEO_DATA[locale]['blog/zustand-state-management'];
+const jsonLd = getJsonLd('article', {
+  title: 'Zustand: Лёгкое управление состоянием в React без лишнего кода',
+  description: seo.description,
+  url: `${Astro.url.href}`,
+  datePublished: '2026-06-29',
+}, locale);
+const blogUrl = getRelativeLocaleUrl(locale, 'blog')
+---
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords} jsonLd={jsonLd}>
+  <main class="blog-article">
+    <div class="blog-article__content">
+      <a href={blogUrl} class="blog-article__back">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+          <line x1="19" y1="12" x2="5" y2="12" />
+          <polyline points="12 19 5 12 12 5" />
+        </svg>
+        Назад к блогу
+      </a>
+
+      <div class="blog-article__header">
+        <div class="blog-article__meta">
+          <span class="blog-article__tag">React</span>
+          <span class="blog-article__tag">Управление состоянием</span>
+          <span class="blog-article__tag">Туториал</span>
+        </div>
+        <h1 class="blog-article__title">Zustand: Лёгкое управление состоянием в React без лишнего кода</h1>
+        <div class="blog-article__info">
+          <span>29 июня 2026</span>
+          <span class="blog-article__dot"></span>
+          <span>8 мин чтения</span>
+        </div>
+      </div>
+
+      <div class="blog-article__body">
+        <p>Эффективное управление состоянием — ключевая часть создания современных React-приложений. Инструменты вроде Redux мощные, но для малых и средних проектов могут показаться сложными. Zustand предлагает лёгкую и интуитивную альтернативу управления состоянием с минимальным боилплейтом.</p>
+
+        <p>В этой статье мы расскажем, что такое Zustand, как он работает и как использовать его на практических примерах.</p>
+
+        <h2>Что такое Zustand?</h2>
+        <p>Zustand — это небольшая, быстрая и масштабируемая библиотека управления состоянием для React. Она позволяет создавать глобальное состояние без необходимости в провайдерах, редюсерах или сложных конфигурациях.</p>
+
+        <p>Основные особенности:</p>
+        <ul>
+          <li>Минимальная настройка</li>
+          <li>Отсутствие лишнего кода</li>
+          <li>Простая интеграция с React</li>
+          <li>Поддержка простых и сложных состояний</li>
+        </ul>
+
+        <h2>Установка Zustand</h2>
+        <p>Установить Zustand можно с помощью npm или yarn:</p>
+        <pre><code>npm install zustand</code></pre>
+
+        <h2>Создание хранилища</h2>
+        <p>В Zustand состояние хранится в центральном хранилище. Вы определяете хранилище с помощью функции.</p>
+        <p>Пример:</p>
+        <pre><code>import &#123; create &#125; from 'zustand'
+
+const useStore = create((set) =&gt; (&#123;
+  count: 0,
+  increase: () =&gt; set((state) =&gt; (&#123; count: state.count + 1 &#125;)),
+  decrease: () =&gt; set((state) =&gt; (&#123; count: state.count - 1 &#125;))
+&#125;))</code></pre>
+        <p>В этом примере:</p>
+        <ul>
+          <li><code>count</code> — это состояние</li>
+          <li><code>increase</code> и <code>decrease</code> — это действия для обновления состояния</li>
+        </ul>
+
+        <h2>Использование хранилища в компонентах</h2>
+        <p>Вы можете напрямую использовать хранилище внутри React-компонентов.</p>
+        <p>Пример:</p>
+        <pre><code>function Counter() &#123;
+  const &#123; count, increase, decrease &#125; = useStore()
+
+  return (
+    &lt;div&gt;
+      &lt;h1&gt;&#123;count&#125;&lt;/h1&gt;
+      &lt;button onClick=&#123;increase&#125;&gt;Увеличить&lt;/button&gt;
+      &lt;button onClick=&#123;decrease&#125;&gt;Уменьшить&lt;/button&gt;
+    &lt;/div&gt;
+  )
+&#125;</code></pre>
+        <p>Этот подход исключает необходимость в провайдерах или обёртках контекста.</p>
+
+        <h2>Обновление состояния</h2>
+        <p>Zustand использует простую функцию <code>set</code> для обновления состояния.</p>
+        <p>Пример:</p>
+        <pre><code>set((state) =&gt; (&#123; count: state.count + 1 &#125;))</code></pre>
+        <p>Также можно обновить несколько значений одновременно:</p>
+        <pre><code>set(&#123; count: 10 &#125;)</code></pre>
+
+        <h2>Работа со сложным состоянием</h2>
+        <p>Zustand может управлять более сложными структурами состояний, такими как объекты и массивы.</p>
+        <p>Пример:</p>
+        <pre><code>const useUserStore = create((set) =&gt; (&#123;
+  user: null,
+  setUser: (userData) =&gt; set(&#123; user: userData &#125;),
+  clearUser: () =&gt; set(&#123; user: null &#125;)
+&#125;))</code></pre>
+
+        <h2>Асинхронные действия</h2>
+        <p>Zustand легко поддерживает асинхронные операции.</p>
+        <p>Пример:</p>
+        <pre><code>const useDataStore = create((set) =&gt; (&#123;
+  data: [],
+  fetchData: async () =&gt; &#123;
+    const response = await fetch('https://api.example.com/data')
+    const result = await response.json()
+    set(&#123; data: result &#125;)
+  &#125;
+&#125;))</code></pre>
+
+        <h2>Поддержка middleware</h2>
+        <p>Zustand поддерживает middleware для дополнительного функционала.</p>
+        <p>Распространённые middleware:</p>
+        <ul>
+          <li>Persistence (сохранение состояния в localStorage)</li>
+          <li>Logging (логирование)</li>
+          <li>Интеграция с Devtools</li>
+        </ul>
+
+        <p>Пример с persistence:</p>
+        <pre><code>import &#123; create &#125; from 'zustand'
+import &#123; persist &#125; from 'zustand/middleware'
+
+const useStore = create(
+  persist(
+    (set) =&gt; (&#123;
+      count: 0,
+      increase: () =&gt; set((state) =&gt; (&#123; count: state.count + 1 &#125;))
+    &#125;),
+    &#123;
+      name: 'counter-storage'
+    &#125;
+  )
+)</code></pre>
+
+        <h2>Преимущества Zustand</h2>
+        <ul>
+          <li>Простота и лёгкость изучения</li>
+          <li>Минимум лишнего кода по сравнению с Redux</li>
+          <li>Не нужны провайдеры контекста</li>
+          <li>Хорошая производительность с избирательным ре-рендерингом</li>
+          <li>Подходит как для малых, так и для крупных приложений</li>
+        </ul>
+
+        <h2>Когда использовать Zustand</h2>
+        <p>Zustand — хороший выбор, когда:</p>
+        <ul>
+          <li>Вам нужно лёгкое решение для управления состоянием</li>
+          <li>Вам нужно глобальное состояние без сложности</li>
+          <li>Вы создаёте малые или средние React-приложения</li>
+          <li>Вы предпочитаете простой и чистый API</li>
+        </ul>
+
+        <h2>Заключение</h2>
+        <p>Zustand — это современная библиотека управления состоянием, которая упрощает работу с глобальным состоянием в React-приложениях. Она убирает сложность, характерную для традиционных решений, сохраняя при этом гибкость и масштабируемость. Благодаря минимальной настройке, встроенной поддержке асинхронных действий и возможностям middleware, Zustand является практичным выбором для разработчиков, стремящихся эффективно управлять состоянием.</p>
+
+        <p>Используя Zustand, разработчики могут писать более чистый код, уменьшать количество шаблонного кода и сосредоточиться на создании функциональности, а не на управлении сложностью состояний.</p>
+      </div>
+    </div>
+  </main>
+</Layout>

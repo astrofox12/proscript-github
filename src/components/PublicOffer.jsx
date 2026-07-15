@@ -1,0 +1,83 @@
+import React from "react";
+
+export default function PublicOffer({ t: tProp, homeUrl, currentLocale }) {
+  const t = typeof tProp === "string" ? JSON.parse(tProp) : tProp;
+  const po = t.publicOffer;
+
+  return (
+    <>
+      <main className="privacy">
+        <div className="privacy__content">
+          <div className="product-detail__back">
+            <a href={homeUrl} className="product-detail__back-link">
+              <svg viewBox="0 0 24 24" width="0.9rem" height="0.9rem" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12" />
+                <polyline points="12 19 5 12 12 5" />
+              </svg>
+              {po.backToHome}
+            </a>
+          </div>
+          <h1 className="privacy__title">{po.title}</h1>
+
+          <nav className="privacy__toc">
+            <h2 className="privacy__toc-title">{po.tocTitle}</h2>
+            <ol className="privacy__toc-list">
+              {po.sections.map((s) => (
+                <li key={s.id}>
+                  <a href={`#${s.id}`} className="privacy__toc-link">{s.label}</a>
+                </li>
+              ))}
+            </ol>
+          </nav>
+
+          {po.sections.map((section) => (
+            <React.Fragment key={section.id}>
+              <section className="privacy__section" id={section.id}>
+                <h2 className="privacy__heading">{section.heading}</h2>
+                {section.blocks.map((block, i) => {
+                  if (block.type === "p") {
+                    if (block.html) {
+                      return <p key={i} dangerouslySetInnerHTML={{ __html: block.html }} />;
+                    }
+                    return <p key={i}>{block.text}</p>;
+                  }
+                  if (block.type === "list") {
+                    return (
+                      <ul key={i} className="privacy__list">
+                        {block.items.map((item, j) => (
+                          <li key={j} dangerouslySetInnerHTML={{ __html: item }} />
+                        ))}
+                      </ul>
+                    );
+                  }
+                  if (block.type === "contact") {
+                    return (
+                      <p key={i}>
+                        {block.items.map((item, j) => (
+                          <React.Fragment key={j}>
+                            <strong>{item.label}</strong> {item.value}
+                            {j < block.items.length - 1 && <br />}
+                          </React.Fragment>
+                        ))}
+                      </p>
+                    );
+                  }
+                  return null;
+                })}
+              </section>
+              {section.id !== po.sections[po.sections.length - 1].id && (
+                <hr className="privacy__divider" />
+              )}
+            </React.Fragment>
+          ))}
+        </div>
+      </main>
+
+      <style>{`
+        html {
+          scroll-behavior: smooth;
+        }
+      `}</style>
+    </>
+  );
+}

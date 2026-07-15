@@ -1,0 +1,13 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import BlogList from "../../components/BlogList.jsx";
+import { getRelativeLocaleUrl } from 'astro:i18n';
+import { SEO_DATA } from '../../lib/seo.js';
+const locale = Astro.currentLocale ?? "en"
+const seo = SEO_DATA[locale].blog;
+const homeUrl = getRelativeLocaleUrl(locale, '')
+const blogUrl = getRelativeLocaleUrl(locale, 'blog')
+---
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords}>
+    <BlogList client:load currentLocale={locale} homeUrl={homeUrl} blogUrl={blogUrl} />
+</Layout>
