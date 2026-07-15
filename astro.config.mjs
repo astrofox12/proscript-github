@@ -7,7 +7,7 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   // adapter: cloudflare(),
-  site: 'https://proscriptacademy.com',
+  site: 'https://courses.proscriptacademy.com',
   integrations: [react(), sitemap()],
   i18n: {
     locales: ["en", "ru"],
