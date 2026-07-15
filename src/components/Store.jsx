@@ -1,5 +1,4 @@
 import React, { useState, useMemo } from "react";
-import Header from "./Header.jsx";
 import CartModal from "./CartModal.jsx";
 import CheckoutModal from "./CheckoutModal.jsx";
 import Banner from "./Banner.jsx";
@@ -149,14 +148,6 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
 
   return (
     <>
-      <Header
-        currentLocale={currentLocale}
-        logoAsLink={false}
-        onTagFilter={updateTag}
-        aboutUrl={aboutUrl}
-        blogUrl={blogUrl}
-      />
-
       <main className="catalog">
         <Banner t={t} />
 
