@@ -651,6 +651,8 @@ export default {
     writeMore: "Write more",
   },
   checkout: {
+    maintenanceTitle: "Technical maintenance in progress",
+    maintenanceMessage: "Payment is temporarily unavailable. Please try again later.",
     closeLabel: "Close checkout",
     enterEmail: "Enter your email",
     emailSubtitle: "We need it to send you the order.",

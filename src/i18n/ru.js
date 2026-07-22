@@ -651,6 +651,8 @@ export default {
     writeMore: "Написать ещё",
   },
   checkout: {
+    maintenanceTitle: "Ведутся технические работы",
+    maintenanceMessage: "Оплата временно недоступна. Пожалуйста, попробуйте позже.",
     closeLabel: "Закрыть оформление",
     enterEmail: "Введите ваш email",
     emailSubtitle: "Он нужен нам, чтобы отправить вам заказ.",

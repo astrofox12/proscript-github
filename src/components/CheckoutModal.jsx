@@ -22,6 +22,7 @@ export default function CheckoutModal({
   locale,
 }) {
   checkoutT = checkoutT || {};
+  const MAINTENANCE_MODE = true;
   const total = items.reduce((sum, item) => sum + item.price, 0);
 
   useEffect(() => {
@@ -58,7 +59,18 @@ export default function CheckoutModal({
             <h2 className="modal__email-title">{checkoutT.enterEmail}</h2>
             <p className="modal__email-subtitle">{checkoutT.emailSubtitle}</p>
             <p className="modal__email-desc">{checkoutT.emailDescription}</p>
-            <form className="modal__form" onSubmit={(e) => { e.preventDefault(); onNextStep(); }}>
+            {MAINTENANCE_MODE && (
+              <div className="modal__maintenance-banner">
+                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#e74c3c" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="12" y1="8" x2="12" y2="12" />
+                  <line x1="12" y1="16" x2="12.01" y2="16" />
+                </svg>
+                <h3 className="modal__maintenance-title">{checkoutT.maintenanceTitle}</h3>
+                <p className="modal__maintenance-message">{checkoutT.maintenanceMessage}</p>
+              </div>
+            )}
+            <form className="modal__form" onSubmit={(e) => { e.preventDefault(); if (!MAINTENANCE_MODE) onNextStep(); }}>
               <input
                 id="checkout-email"
                 className="modal__input modal__input--wide"
@@ -66,13 +78,14 @@ export default function CheckoutModal({
                 placeholder={checkoutT.emailPlaceholder}
                 value={email}
                 onChange={(e) => onEmailChange(e.target.value)}
+                disabled={MAINTENANCE_MODE}
                 required
               />
               <p className="modal__terms">
                 {checkoutT.byContinuing}<br />
                 <a href={termsUrl} target="_blank" rel="noopener noreferrer">{checkoutT.termsLink}</a> {checkoutT.conjunction} <a href={privacyUrl} target="_blank" rel="noopener noreferrer">{checkoutT.privacyLink}</a>
               </p>
-              <button className="modal__submit" type="submit" disabled={!email || processing}>
+              <button className="modal__submit" type="submit" disabled={!email || processing || MAINTENANCE_MODE}>
                 {checkoutT.continueToPayment}
               </button>
               <p className="modal__total-cost">{checkoutT.totalCostWithFee}<br /><span><Price usdPrice={total} locale={locale} /></span></p>
