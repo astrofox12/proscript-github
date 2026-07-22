@@ -4,7 +4,6 @@ import CheckoutModal from "./CheckoutModal.jsx";
 import Banner from "./Banner.jsx";
 import CourseCard from "./CourseCard.jsx";
 import { placeOrder } from "../services/orderService.js";
-import { isValidEmail } from "../services/emailService.js";
 import useCart from "../hooks/useCart.js";
 import { ui } from "../i18n/index.js";
 import { COURSES } from "../lib/courses.js";
@@ -22,7 +21,6 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
   const [checkoutItems, setCheckoutItems] = useState([]);
   const [checkoutStep, setCheckoutStep] = useState(1);
   const [email, setEmail] = useState("");
-  const [card, setCard] = useState({ number: "", expiry: "", cvc: "" });
   const [processing, setProcessing] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
@@ -76,7 +74,6 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
     setCheckoutItems(items);
     setCheckoutStep(1);
     setEmail("");
-    setCard({ number: "", expiry: "", cvc: "" });
     setProcessing(false);
     setError("");
     setSuccess(false);
@@ -92,36 +89,22 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
     setSuccess(false);
   };
 
-  const handleNextStep = () => {
-    if (!email || !isValidEmail(email)) {
-      setError("Please enter a valid email address.");
-      return;
-    }
-    setError("");
-    setCheckoutStep(2);
-  };
-
-  const handleCardChange = (field, value) => {
-    setCard((current) => ({ ...current, [field]: value }));
-  };
-
   const handlePaymentSubmit = async () => {
-    if (!card.number || !card.expiry || !card.cvc) {
-      setError("Please complete all card fields.");
-      return;
-    }
-
     setError("");
     setProcessing(true);
     setCheckoutStep(3);
 
     try {
-      await placeOrder({ items: checkoutItems, email, paymentInfo: card });
-      setSuccess(true);
-      removeItems(checkoutItems.map((item) => item.id));
+      const result = await placeOrder({
+        items: checkoutItems,
+        email,
+        locale: currentLocale,
+        exchangeRate: null,
+      });
+      window.location.href = result.redirectUrl;
     } catch (err) {
       setError(err.message || "Purchase could not be completed.");
-      setCheckoutStep(2);
+      setCheckoutStep(1);
     } finally {
       setProcessing(false);
     }
@@ -267,16 +250,12 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
           items={checkoutItems}
           step={checkoutStep}
           email={email}
-          card={card}
           error={error}
           processing={processing}
           success={success}
           onClose={closeCheckout}
           onEmailChange={setEmail}
-          onCardChange={handleCardChange}
-          onNextStep={handleNextStep}
           onSubmit={handlePaymentSubmit}
-          onBack={() => setCheckoutStep(1)}
           checkoutT={checkoutT}
           termsUrl={termsUrl}
           privacyUrl={privacyUrl}
@@ -355,16 +334,12 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
           items={checkoutItems}
           step={checkoutStep}
           email={email}
-          card={card}
           error={error}
           processing={processing}
           success={success}
           onClose={closeCheckout}
           onEmailChange={setEmail}
-          onCardChange={handleCardChange}
-          onNextStep={handleNextStep}
           onSubmit={handlePaymentSubmit}
-          onBack={() => setCheckoutStep(1)}
           checkoutT={checkoutT}
           termsUrl={termsUrl}
           privacyUrl={privacyUrl}

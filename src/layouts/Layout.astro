@@ -11,6 +11,7 @@ interface Props {
   keywords?: string;
   canonicalUrl?: string;
   jsonLd?: Record<string, any>;
+  hideHeader?: boolean;
 }
 
 const {
@@ -19,6 +20,7 @@ const {
   keywords = 'programming courses, learn to code, online programming school',
   canonicalUrl,
   jsonLd,
+  hideHeader = false,
 } = Astro.props;
 
 const locale = Astro.currentLocale ?? "en";
@@ -58,6 +60,7 @@ const blogUrl = getRelativeLocaleUrl(locale, 'blog');
 	</head>
 	<body>
 		<div class="app">
+			{!hideHeader && (
 			<Header
 				currentLocale={locale}
 				logoAsLink={!isHomePage}
@@ -65,6 +68,7 @@ const blogUrl = getRelativeLocaleUrl(locale, 'blog');
 				blogUrl={blogUrl}
 				client:load
 			/>
+			)}
 			<slot />
 			<Footer
 			    aboutUrl={aboutUrl}

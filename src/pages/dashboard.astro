@@ -1,0 +1,11 @@
+---
+import Layout from "../layouts/Layout.astro";
+import MyCoursesPage from "../components/MyCoursesPage.jsx";
+import { SEO_DATA } from '../lib/seo.js';
+const locale = Astro.currentLocale ?? "en";
+const data = SEO_DATA[locale] || SEO_DATA.en;
+const seo = data.dashboard || { title: 'My Courses — ProScript Academy', description: 'Your enrolled courses.', keywords: 'courses, dashboard' };
+---
+<Layout title={seo.title} description={seo.description} keywords={seo.keywords} hideHeader>
+  <MyCoursesPage client:load currentLocale={locale} />
+</Layout>

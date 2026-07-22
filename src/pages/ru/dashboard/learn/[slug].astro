@@ -1,0 +1,19 @@
+---
+import Layout from "../../../../layouts/Layout.astro";
+import ModulePage from "../../../../components/ModulePage.jsx";
+import { SEO_DATA } from '../../../../lib/seo.js';
+import { COURSES } from '../../../../lib/courses.js';
+
+export async function getStaticPaths() {
+  return COURSES.map(c => ({ params: { slug: c.id } }));
+}
+
+if (Astro.params.slug === 'python-dev') {
+  return Astro.redirect('/ru/dashboard', 302);
+}
+const locale = Astro.currentLocale ?? "en";
+const seo = SEO_DATA[locale].dashboard;
+---
+<Layout title={seo.title} description={seo.description} hideHeader>
+  <ModulePage client:load currentLocale={locale} />
+</Layout>

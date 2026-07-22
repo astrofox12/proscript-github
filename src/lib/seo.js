@@ -44,6 +44,16 @@ export const SEO_DATA = {
       description: 'Public offer agreement for course enrollment at ProScript Academy.',
       keywords: 'public offer, course agreement, enrollment terms',
     },
+    'payment-failed': {
+      title: 'Payment Failed — ProScript Academy',
+      description: 'Your payment did not go through. Don\'t worry, we\'re here to help.',
+      keywords: 'payment failed, payment error, transaction declined',
+    },
+    'payment-processing': {
+      title: 'Payment Processing — ProScript Academy',
+      description: 'We are confirming your payment. Thank you for choosing ProScript Academy. Check your email for access details.',
+      keywords: 'payment processing, payment confirmation, thank you, order pending',
+    },
     'partner-program': {
       title: 'Partner Program — ProScript Academy',
       description: 'Join the ProScript Academy partner program. Earn commissions by referring students to our programming courses.',
@@ -53,6 +63,11 @@ export const SEO_DATA = {
       title: 'Zustand: Lightweight State Management for React — ProScript Academy',
       description: 'Learn how to use Zustand for simple and efficient state management in React applications without boilerplate code.',
       keywords: 'Zustand, React state management, React tutorial, state management library',
+    },
+    dashboard: {
+      title: 'My Courses — ProScript Academy',
+      description: 'Your enrolled courses at ProScript Academy.',
+      keywords: 'my courses, dashboard, learning, enrolled courses',
     },
   },
   ru: {
@@ -96,6 +111,16 @@ export const SEO_DATA = {
       description: 'Публичная оферта на запись на курсы ProScript Academy.',
       keywords: 'публичная оферта, договор оферты, условия записи',
     },
+    'payment-failed': {
+      title: 'Оплата не прошла — ProScript Academy',
+      description: 'Платёж не прошёл. Не переживайте, мы поможем разобраться.',
+      keywords: 'оплата не прошла, ошибка оплаты, платёж отклонён',
+    },
+    'payment-processing': {
+      title: 'Подтверждение платежа — ProScript Academy',
+      description: 'Мы подтверждаем ваш платёж. Спасибо, что выбрали ProScript Academy. Проверьте почту для получения доступа.',
+      keywords: 'подтверждение платежа, оплата обрабатывается, спасибо за заказ',
+    },
     'partner-program': {
       title: 'Партнёрская программа — ProScript Academy',
       description: 'Присоединяйтесь к партнёрской программе ProScript Academy. Зарабатывайте, рекомендуя наши курсы программирования.',
@@ -105,6 +130,11 @@ export const SEO_DATA = {
       title: 'Zustand: Лёгкое управление состоянием в React без лишнего кода — ProScript Academy',
       description: 'Узнайте, как использовать Zustand для простого и эффективного управления состоянием в React-приложениях без шаблонного кода.',
       keywords: 'Zustand, управление состоянием React, туториал React, библиотека состояний',
+    },
+    dashboard: {
+      title: 'Мои курсы — ProScript Academy',
+      description: 'Ваши курсы в ProScript Academy.',
+      keywords: 'мои курсы, кабинет, обучение, активированные курсы',
     },
   },
 };
