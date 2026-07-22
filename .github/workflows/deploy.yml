@@ -20,9 +20,8 @@ jobs:
         uses: withastro/action@v3
         with:
           node-version: 22
-          env:
-            # ← Вот сюда добавляем ключ Clerk
-            PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.PUBLIC_CLERK_PUBLISHABLE_KEY }}
+        env:
+          PUBLIC_CLERK_PUBLISHABLE_KEY: ${{ secrets.PUBLIC_CLERK_PUBLISHABLE_KEY }}
 
   deploy:
     needs: build
