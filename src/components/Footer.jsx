@@ -8,7 +8,7 @@ export default function Footer({ aboutUrl, contactsUrl, termsUrl, privacyUrl, pu
       <div className="footer__inner">
         <div className="footer__col">
           <h3 className="footer__title">{footer.email}</h3>
-          <a href="mailto:support@proscript.academy" className="footer__link">support@proscript.academy</a>
+          <a href="mailto:support@proscriptacademy.com" className="footer__link">support@proscriptacademy.com</a>
         </div>
         <div className="footer__col">
           <h3 className="footer__title">{footer.phone}</h3>

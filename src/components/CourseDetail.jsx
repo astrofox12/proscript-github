@@ -3,11 +3,7 @@ import CheckoutModal from "./CheckoutModal.jsx";
 import { placeOrder } from "../services/orderService.js";
 import { isValidEmail } from "../services/emailService.js";
 import { ui } from "../i18n/index.js";
-
-const CURRENCY_MAP = {
-  USD: { symbol: '$', code: 'USD' },
-  RUB: { symbol: '₽', code: 'RUB' },
-};
+import { Price } from "../modules/price/index.js";
 
 const SECTION_ICON = (
   <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -36,7 +32,6 @@ CourseDetail({ course: courseJson, currentLocale, homeUrl, termsUrl, privacyUrl 
   const t = ui[currentLocale] || ui.en;
   const ct = t.course || {};
   const locale = currentLocale;
-  const currency = CURRENCY_MAP[course.currency] || CURRENCY_MAP.USD;
 
   const title = course.title[locale] || course.title.en;
   const hook = course.hook[locale] || course.hook.en;
@@ -396,10 +391,8 @@ CourseDetail({ course: courseJson, currentLocale, homeUrl, termsUrl, privacyUrl 
               <div className="course-detail__price-block">
                 <span className="course-detail__price-label">{ct.price}</span>
                 <div className="course-detail__price-row">
-                  <span className="course-detail__price-value">{currency.symbol}{course.price.toLocaleString(locale === 'ru' ? 'ru-RU' : 'en-US')}</span>
-                  <span className="course-detail__price-currency">{currency.code}</span>
+                  <span className="course-detail__price-value"><Price usdPrice={course.price} locale={locale} /></span>
                 </div>
-
               </div>
 
               <div className="course-detail__sidebar-tags">
@@ -457,6 +450,7 @@ CourseDetail({ course: courseJson, currentLocale, homeUrl, termsUrl, privacyUrl 
           termsUrl={termsUrl}
           privacyUrl={privacyUrl}
           successMessage={checkoutT.courseAccessOnWay}
+          locale={locale}
         />
       )}
     </>

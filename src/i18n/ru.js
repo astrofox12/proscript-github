@@ -56,7 +56,7 @@ export default {
     contacts: {
       title: "Свяжитесь с нами",
       emailLabel: "Email:",
-      email: "support@proscript.academy",
+      email: "support@proscriptacademy.com",
       responseTimeLabel: "Время ответа:",
       responseTime: "В течение 24 часов",
     },
@@ -272,7 +272,7 @@ export default {
           },
           {
             type: "p",
-            text: "9.2. Контакты службы поддержки: support@proscript.academy / +7-902-261-55-51.",
+            text: "9.2. Контакты службы поддержки: support@proscriptacademy.com / +7-902-261-55-51.",
           },
         ],
       },
@@ -319,7 +319,7 @@ export default {
     phoneLabel: "Телефон",
     phoneValue: "+7-902-261-55-51",
     emailLabel: "Email",
-    emailValue: "support@proscript.academy",
+    emailValue: "support@proscriptacademy.com",
     hoursLabel: "Часы работы",
     hoursValue: "Пн-Пт, 10:00 — 19:00 (UTC+3)",
     legalBadge: "Юридическая информация",
@@ -724,7 +724,7 @@ export default {
     },
     contacts: {
       title: "Свяжитесь с нами",
-      email: "support@proscript.academy",
+      email: "support@proscriptacademy.com",
       responseTimeLabel: "Время ответа:",
       responseTime: "В течение 24 часов",
     },
@@ -1362,7 +1362,7 @@ export default {
             type: "contact",
             items: [
               { label: "Телефон: ", value: "+7-902-261-55-51" },
-              { label: "Email: ", value: "support@proscript.academy" },
+              { label: "Email: ", value: "support@proscriptacademy.com" },
               { label: "Часы работы: ", value: "Пн-Пт, 10:00 — 19:00 (UTC+3)" },
             ],
           },

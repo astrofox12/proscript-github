@@ -3,6 +3,7 @@ import CartModal from "./CartModal.jsx";
 import CheckoutModal from "./CheckoutModal.jsx";
 import { placeOrder } from "../services/orderService.js";
 import { isValidEmail } from "../services/emailService.js";
+import { Price } from "../modules/price/index.js";
 import eldenRingImg from "../assets/game/elden-ring.webp";
 import baldursGate3Img from "../assets/game/baldurs-gate-3.webp";
 import starfieldImg from "../assets/game/starfield.webp";
@@ -264,10 +265,9 @@ export default function ProductDetail({ game: gameJson, t: tProp, homeUrl, terms
               <div className="product-detail__price">
                 <span className="product-detail__old-price-wrap">
                   <span className="product-detail__badge">-15%</span>
-                  <span className="product-detail__old-price">${(game.price * 1.15).toFixed(2)}</span>
+                  <span className="product-detail__old-price"><Price usdPrice={game.price * 1.15} locale="en" /></span>
                 </span>
-                <span className="product-detail__current-price">{game.price}</span>
-                <span className="product-detail__currency">USD</span>
+                <span className="product-detail__current-price"><Price usdPrice={game.price} locale={currentLocale} /></span>
               </div>
 
               <button
@@ -347,6 +347,7 @@ export default function ProductDetail({ game: gameJson, t: tProp, homeUrl, terms
             onClear={clearCart}
             onBuy={(items) => openCheckout(items)}
             cartT={cartT}
+            locale={currentLocale}
           />
       )}
 
@@ -368,6 +369,7 @@ export default function ProductDetail({ game: gameJson, t: tProp, homeUrl, terms
             checkoutT={checkoutT}
             termsUrl={termsUrl}
             privacyUrl={privacyUrl}
+            locale={currentLocale}
           />
       )}
     </>

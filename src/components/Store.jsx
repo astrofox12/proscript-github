@@ -258,6 +258,7 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
           onClear={clearCart}
           onBuy={(items) => openCheckout(items)}
           cartT={cartT}
+          locale={currentLocale}
         />
       )} */}
 
@@ -279,6 +280,7 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
           checkoutT={checkoutT}
           termsUrl={termsUrl}
           privacyUrl={privacyUrl}
+          locale={currentLocale}
         />
       )} */}
 
@@ -344,6 +346,7 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
           onClear={clearCart}
           onBuy={(items) => openCheckout(items)}
           cartT={cartT}
+          locale={currentLocale}
         />
       )} */}
 
@@ -365,6 +368,7 @@ export default function Store({ productUrlPrefix, courseUrlPrefix, termsUrl, pri
           checkoutT={checkoutT}
           termsUrl={termsUrl}
           privacyUrl={privacyUrl}
+          locale={currentLocale}
         />
       )} */}
     </>

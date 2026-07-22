@@ -1,6 +1,7 @@
 import React from 'react';
+import { Price } from "../modules/price/index.js";
 
-export default function CartModal({ items, onClose, onRemove, onBuy, onClear, cartT }) {
+export default function CartModal({ items, onClose, onRemove, onBuy, onClear, cartT, locale }) {
   cartT = cartT || {};
   const total = items.reduce((sum, item) => sum + item.price, 0);
 
@@ -41,7 +42,7 @@ export default function CartModal({ items, onClose, onRemove, onBuy, onClear, ca
                     <div className="modal__review-label">{item.title}</div>
                     <span className="modal__review-genre">{item.genre}</span>
                   </div>
-                  <div className="modal__review-price">${item.price}</div>
+                  <div className="modal__review-price"><Price usdPrice={item.price} locale={locale} /></div>
                   <button
                     className="modal__back"
                     onClick={() => onRemove(item.id)}
@@ -58,7 +59,7 @@ export default function CartModal({ items, onClose, onRemove, onBuy, onClear, ca
             </div>
             <div className="modal__review-row modal__review-row--total">
               <span className="modal__review-label">{cartT.total}</span>
-              <span className="modal__review-price">${total}</span>
+              <span className="modal__review-price"><Price usdPrice={total} locale={locale} /></span>
             </div>
           </div>
         )}

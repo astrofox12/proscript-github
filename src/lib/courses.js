@@ -21,8 +21,8 @@ const COURSES_DATA = [
     },
     projects: 5,
     excerpt: {
-      en: 'Master Python from zero to Junior level. Build 5 real projects, gain commercial experience, get job assistance, and receive a money-back guarantee if you don\'t find a job within 3 months.',
-      ru: 'Освойте Python с нуля до уровня Junior. Создайте 5 реальных проектов, получите коммерческий опыт, помощь с трудоустройством и гарантию возврата денег, если не найдёте работу за 3 месяца.',
+      en: 'Master Python from zero to Junior level. Build 5 real projects, gain commercial experience, and get job assistance.',
+      ru: 'Освойте Python с нуля до уровня Junior. Создайте 5 реальных проектов, получите коммерческий опыт и помощь с трудоустройством.',
     },
     hook: {
       en: 'Python is the #1 programming language in the world (TIOBE, PYPL). Companies like Google, Amazon, Netflix, and Spotify are actively hiring Python developers. Starting salary from $1,500 — master the language, build real projects, gain commercial experience, and launch your career with our job guarantee.',

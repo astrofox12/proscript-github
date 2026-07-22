@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Price } from "../modules/price/index.js";
 
 export default function CheckoutModal({
   items,
@@ -18,6 +19,7 @@ export default function CheckoutModal({
   termsUrl,
   privacyUrl,
   successMessage,
+  locale,
 }) {
   checkoutT = checkoutT || {};
   const total = items.reduce((sum, item) => sum + item.price, 0);
@@ -73,7 +75,7 @@ export default function CheckoutModal({
               <button className="modal__submit" type="submit" disabled={!email || processing}>
                 {checkoutT.continueToPayment}
               </button>
-              <p className="modal__total-cost">{checkoutT.totalCostWithFee}<br /><span>${total} USD</span></p>
+              <p className="modal__total-cost">{checkoutT.totalCostWithFee}<br /><span><Price usdPrice={total} locale={locale} /></span></p>
             </form>
             <div className="modal__paylogos">
               <img src="/paylogo/visa.svg" className="modal__paylogo-icon" alt="Visa" />
@@ -122,7 +124,7 @@ export default function CheckoutModal({
             </div>
             <div className="modal__review-row">
               <span className="modal__review-label">{checkoutT.totalCharge}</span>
-              <span className="modal__review-price">${total}</span>
+              <span className="modal__review-price"><Price usdPrice={total} locale={locale} /></span>
             </div>
             {error && <div className="modal__error">{error}</div>}
             <div className="modal__row">

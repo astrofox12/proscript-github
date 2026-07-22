@@ -1,9 +1,5 @@
 import React from "react";
-
-const CURRENCY_MAP = {
-  USD: { symbol: '$', code: 'USD' },
-  RUB: { symbol: '₽', code: 'RUB' },
-};
+import { Price } from "../modules/price/index.js";
 
 export default React.memo(function CourseCard({ course, locale, productUrlPrefix }) {
   const title = course.title[locale] || course.title.en;
@@ -13,7 +9,6 @@ export default React.memo(function CourseCard({ course, locale, productUrlPrefix
   const excerpt = course.excerpt[locale] || course.excerpt.en;
   const link = `${productUrlPrefix}${course.slug}`;
   const moreLabel = locale === "ru" ? "Подробнее" : "Learn more";
-  const currency = CURRENCY_MAP[course.currency] || CURRENCY_MAP.USD;
 
   const cardClass = `course-card${course.id === 'python-dev' ? ' course-card--python' : ''}${course.id === 'java-enterprise' ? ' course-card--java' : ''}${course.id === 'react-typescript' ? ' course-card--react' : ''}${course.id === 'sql-databases' ? ' course-card--sql' : ''}${course.id === 'devops-infrastructure' ? ' course-card--devops' : ''}${course.id === 'data-science-ml' ? ' course-card--ds' : ''}${course.id === 'qa-automation' ? ' course-card--qa' : ''}${course.id === 'telegram-bots' ? ' course-card--tg' : ''}${course.id === 'algorithms-data-structures' ? ' course-card--algo' : ''}${course.id === 'backend-nestjs' ? ' course-card--nest' : ''}${course.id === 'figma-web-design' ? ' course-card--figma' : ''}${course.id === 'ui-ux-design' ? ' course-card--uiux' : ''}${course.id === 'photoshop-pro' ? ' course-card--ps' : ''}${course.id === 'motion-design-ae' ? ' course-card--ae' : ''}${course.id === 'blender-3d' ? ' course-card--blender' : ''}${course.id === 'tilda-web-design' ? ' course-card--tilda' : ''}${course.id === 'smm-manager' ? ' course-card--smm' : ''}${course.id === 'ppc-advertising' ? ' course-card--ppc' : ''}${course.id === 'copywriting-neurocopywriting' ? ' course-card--copy' : ''}`;
 
@@ -251,8 +246,7 @@ export default React.memo(function CourseCard({ course, locale, productUrlPrefix
 
       <div className="course-card__actions">
         <div className="course-card__price-group">
-          <span className="course-card__price">{currency.symbol}{course.price.toLocaleString(locale === 'ru' ? 'ru-RU' : 'en-US')}</span>
-          <span className="course-card__currency">{currency.code}</span>
+          <span className="course-card__price"><Price usdPrice={course.price} locale={locale} /></span>
         </div>
         <span className="course-card__btn">
           {moreLabel}

@@ -56,7 +56,7 @@ export default {
     contacts: {
       title: "Get in Touch",
       emailLabel: "Email:",
-      email: "support@proscript.academy",
+      email: "support@proscriptacademy.com",
       responseTimeLabel: "Response Time:",
       responseTime: "Within 24 hours",
     },
@@ -272,7 +272,7 @@ export default {
           },
           {
             type: "p",
-            text: "9.2. Support contacts: support@proscript.academy / +7-902-261-55-51.",
+            text: "9.2. Support contacts: support@proscriptacademy.com / +7-902-261-55-51.",
           },
         ],
       },
@@ -319,7 +319,7 @@ export default {
     phoneLabel: "Phone",
     phoneValue: "+7-902-261-55-51",
     emailLabel: "Email",
-    emailValue: "support@proscript.academy",
+    emailValue: "support@proscriptacademy.com",
     hoursLabel: "Working Hours",
     hoursValue: "Mon-Fri, 10:00 — 19:00 (UTC+3)",
     legalBadge: "Legal",
@@ -724,7 +724,7 @@ export default {
     },
     contacts: {
       title: "Get in Touch",
-      email: "support@proscript.academy",
+      email: "support@proscriptacademy.com",
       responseTimeLabel: "Response Time:",
       responseTime: "Within 24 hours",
     },
@@ -1240,7 +1240,7 @@ export default {
             type: "contact",
             items: [
               { label: "Phone: ", value: "+7-902-261-55-51" },
-              { label: "Email: ", value: "support@proscript.academy" },
+              { label: "Email: ", value: "support@proscriptacademy.com" },
               { label: "Working Hours: ", value: "Mon-Fri, 10:00 — 19:00 (UTC+3)" },
             ],
           },
