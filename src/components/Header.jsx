@@ -78,13 +78,6 @@ function HeaderInner({ currentLocale, logoAsLink = true, onTagFilter, aboutUrl, 
 }
 
 export default function Header(props) {
-  const key = import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY;
-
-  console.log("=== Clerk Debug ===");
-  console.log("Has key:", !!key);
-  console.log("Is production key:", key?.startsWith("pk_live_"));
-  console.log("Key preview:", key ? key.slice(0, 25) + "..." : "NO KEY");
-  console.log("Current URL:", window.location.href);
   return (
     <ClerkProvider publishableKey={import.meta.env.PUBLIC_CLERK_PUBLISHABLE_KEY}>
       <HeaderInner {...props} />
